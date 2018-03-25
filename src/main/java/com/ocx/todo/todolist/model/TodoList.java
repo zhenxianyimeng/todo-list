@@ -8,10 +8,10 @@ import java.util.Date;
  * @date 2018/3/24.
  */
 @Entity
-@Table(name = "t_list")
+@Table(name = "t_todo")
 public class TodoList {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String note;

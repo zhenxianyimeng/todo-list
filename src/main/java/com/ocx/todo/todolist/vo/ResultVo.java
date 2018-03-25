@@ -22,7 +22,16 @@ public class ResultVo<T> implements Serializable{
         return new ResultVo(BusinessCode.SUCCESS.code());
     }
 
+    public static ResultVo failed(){
+        return new ResultVo(BusinessCode.FAILED.code(), BusinessCode.FAILED.msg());
+    }
+
     public ResultVo() {
+    }
+
+    public ResultVo(Integer code, String message) {
+        this.code = code;
+        this.message = message;
     }
 
     public ResultVo(Integer code) {

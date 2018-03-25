@@ -1,12 +1,17 @@
 package com.ocx.todo.todolist.controller;
 
+import com.ocx.todo.todolist.model.TodoList;
+import com.ocx.todo.todolist.service.TodoService;
 import com.ocx.todo.todolist.vo.ChangeRequest;
 import com.ocx.todo.todolist.vo.ResultVo;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,11 +22,22 @@ import java.util.Map;
 @RequestMapping("api")
 public class TodoApiController {
 
+    @Autowired
+    private TodoService todoService;
+
     @ApiOperation(value="获取todo列表", notes="获取所有的todo列表,status可选参数")
     @ApiImplicitParam(name = "status", value = "状态", required = false, dataType = "Integer",paramType = "query")
     @GetMapping("list")
     public ResultVo getAll(@RequestParam(required = false) Integer status){
-        return new ResultVo();
+        try {
+            List<TodoList> list = new ArrayList<>();
+            if(status == null){
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ResultVo.failed();
     }
 
     @ApiImplicitParam(name = "id", value = "todo详情id", required = true, dataType = "Long",paramType = "query")
@@ -63,8 +79,16 @@ public class TodoApiController {
     @ApiOperation(value = "新增todo列表")
     @PostMapping("add")
     public ResultVo add(@RequestBody Map<String,String> request){
-        System.out.println(request.get("text"));
-        return ResultVo.succeed();
+        try {
+            String note = request.get("text");
+            boolean success = todoService.add(note);
+            if(success){
+                return ResultVo.succeed();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ResultVo.failed();
     }
 
 

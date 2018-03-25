@@ -5,7 +5,8 @@ package com.ocx.todo.todolist.constant;
  * @date 2018/3/25.
  */
 public enum  BusinessCode {
-    SUCCESS(0,"");
+    SUCCESS(0,""),
+    FAILED(900,"ERROR");
 
     private Integer code;
 
