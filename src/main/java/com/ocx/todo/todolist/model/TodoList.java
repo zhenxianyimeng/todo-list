@@ -1,5 +1,8 @@
 package com.ocx.todo.todolist.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,8 +23,10 @@ public class TodoList {
 
     private Integer deleted;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date gmtCreate;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date gmtModified;
 
     public Long getId() {

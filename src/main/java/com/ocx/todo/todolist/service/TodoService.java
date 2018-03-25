@@ -14,4 +14,10 @@ public interface TodoService {
     List<TodoList> listByStatusOrderByTime(Integer status);
 
     Boolean add(String text);
+
+    Boolean updateStatusById(List<Long> id, Integer status);
+
+    Boolean deletedById(Long id);
+
+    TodoList getById(Long id);
 }
