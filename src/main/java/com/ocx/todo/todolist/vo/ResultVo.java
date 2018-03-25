@@ -1,5 +1,7 @@
 package com.ocx.todo.todolist.vo;
 
+import com.ocx.todo.todolist.constant.BusinessCode;
+
 import java.io.Serializable;
 
 /**
@@ -15,6 +17,17 @@ public class ResultVo<T> implements Serializable{
     private String message;
 
     private T data;
+
+    public static ResultVo succeed(){
+        return new ResultVo(BusinessCode.SUCCESS.code());
+    }
+
+    public ResultVo() {
+    }
+
+    public ResultVo(Integer code) {
+        this.code = code;
+    }
 
     public Integer getCode() {
         return code;

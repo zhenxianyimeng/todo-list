@@ -1,8 +1,13 @@
 package com.ocx.todo.todolist.controller;
 
+import com.ocx.todo.todolist.vo.ChangeRequest;
 import com.ocx.todo.todolist.vo.ResultVo;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @author zjb
@@ -12,9 +17,55 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api")
 public class TodoApiController {
 
-    @ApiOperation(value="获取todo列表", notes="获取所有的todo列表")
-    @RequestMapping(value={"list"}, method= RequestMethod.GET)
-    public ResultVo getAll(){
+    @ApiOperation(value="获取todo列表", notes="获取所有的todo列表,status可选参数")
+    @ApiImplicitParam(name = "status", value = "状态", required = false, dataType = "Integer",paramType = "query")
+    @GetMapping("list")
+    public ResultVo getAll(@RequestParam(required = false) Integer status){
         return new ResultVo();
     }
+
+    @ApiImplicitParam(name = "id", value = "todo详情id", required = true, dataType = "Long",paramType = "query")
+    @ApiOperation(value = "根据id获取详情")
+    @GetMapping("get")
+    public ResultVo getById(@RequestParam Number id){
+        System.out.println(id);
+        return null;
+    }
+
+    @ApiImplicitParam(name = "id", value = "todo详情id", required = true, dataType = "Long",paramType = "query")
+    @ApiOperation(value = "根据id删除todo详情")
+    @GetMapping("delete")
+    public ResultVo deleteById(@RequestParam Number id){
+
+        return ResultVo.succeed();
+    }
+
+    @ApiImplicitParams({@ApiImplicitParam(name = "request", value = "id列表和修改状态", required = true, dataType = "ChangeRequest"),
+    })
+    @ApiOperation(value = "根据id列表和status,修改值")
+    @PostMapping("change")
+    public ResultVo changeStateById(@RequestBody ChangeRequest request){
+
+        return ResultVo.succeed();
+    }
+
+    @ApiImplicitParams({@ApiImplicitParam(name = "q", value = "查询语句", required = true, dataType = "String",paramType = "query"),
+    })
+    @ApiOperation(value = "根据q的值搜索todo text")
+    @GetMapping("search")
+    public ResultVo searchList(@RequestParam String q){
+
+        return ResultVo.succeed();
+    }
+
+    @ApiImplicitParams({@ApiImplicitParam(name = "request", value = "id列表和修改状态", required = true, dataType = "HashMap"),
+    })
+    @ApiOperation(value = "新增todo列表")
+    @PostMapping("add")
+    public ResultVo add(@RequestBody Map<String,String> request){
+        System.out.println(request.get("text"));
+        return ResultVo.succeed();
+    }
+
+
 }
