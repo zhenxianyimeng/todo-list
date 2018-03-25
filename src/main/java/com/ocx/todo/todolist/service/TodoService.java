@@ -20,4 +20,6 @@ public interface TodoService {
     Boolean deletedById(Long id);
 
     TodoList getById(Long id);
+
+    List<TodoList> searchByText(String text);
 }

@@ -59,4 +59,9 @@ class TodoServiceImpl implements TodoService{
         }
         return null;
     }
+
+    @Override
+    public List<TodoList> searchByText(String text) {
+        return todoDao.searchByText(text);
+    }
 }

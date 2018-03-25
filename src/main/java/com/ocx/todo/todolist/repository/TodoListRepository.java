@@ -32,4 +32,7 @@ public interface TodoListRepository extends JpaRepository<TodoList, Long>{
     @Query("update TodoList o set o.deleted =1 where o.id =:id")
     int deletedById(@Param("id")Long id);
 
+    @Query(value = "select * from t_todo o where o.deleted =0 and o.note like %:text%", nativeQuery = true)
+    List<TodoList> searchByText(@Param("text") String text);
+
 }

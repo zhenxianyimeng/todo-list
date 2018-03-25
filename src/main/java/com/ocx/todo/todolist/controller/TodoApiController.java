@@ -107,6 +107,10 @@ public class TodoApiController {
     @GetMapping("search")
     public ResultVo searchList(@RequestParam String q){
         try {
+            List<TodoList> list = todoService.searchByText(q);
+            ResultVo<List<TodoList>> resultVo = new ResultVo<>(BusinessCode.SUCCESS.code(), BusinessCode.SUCCESS.msg());
+            resultVo.setData(list);
+            return resultVo;
         }catch (Exception e){
             e.printStackTrace();
         }
