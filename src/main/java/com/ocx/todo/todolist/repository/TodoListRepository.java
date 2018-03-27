@@ -29,6 +29,10 @@ public interface TodoListRepository extends JpaRepository<TodoList, Long>{
     int updateStatus(@Param("ids")List<Long> ids, @Param("status") Integer status);
 
     @Modifying
+    @Query("update TodoList o set o.note = :note where o.id = :id and o.deleted = 0")
+    int updateNote(@Param("id")Long id, @Param("note") String note);
+
+    @Modifying
     @Query("update TodoList o set o.deleted =1 where o.id =:id")
     int deletedById(@Param("id")Long id);
 

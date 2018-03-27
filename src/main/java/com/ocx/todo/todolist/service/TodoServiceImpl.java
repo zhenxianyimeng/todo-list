@@ -64,4 +64,10 @@ class TodoServiceImpl implements TodoService{
     public List<TodoList> searchByText(String text) {
         return todoDao.searchByText(text);
     }
+
+    @Override
+    @Transactional
+    public Boolean updateNoteById(Long id, String note) {
+        return todoDao.updateNote(id,note) > 0;
+    }
 }

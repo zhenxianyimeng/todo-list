@@ -22,4 +22,6 @@ public interface TodoService {
     TodoList getById(Long id);
 
     List<TodoList> searchByText(String text);
+
+    Boolean updateNoteById(Long id, String note);
 }

@@ -16,6 +16,10 @@ public class ResultVo<T> implements Serializable{
 
     private String message;
 
+    private Long activeCount;
+
+    private Long completedCount;
+
     private T data;
 
     public static ResultVo succeed(){
@@ -62,11 +66,29 @@ public class ResultVo<T> implements Serializable{
         this.data = data;
     }
 
+    public Long getActiveCount() {
+        return activeCount;
+    }
+
+    public void setActiveCount(Long activeCount) {
+        this.activeCount = activeCount;
+    }
+
+    public Long getCompletedCount() {
+        return completedCount;
+    }
+
+    public void setCompletedCount(Long completedCount) {
+        this.completedCount = completedCount;
+    }
+
     @Override
     public String toString() {
         return "ResultVo{" +
                 "code=" + code +
                 ", message='" + message + '\'' +
+                ", activeCount=" + activeCount +
+                ", completedCount=" + completedCount +
                 ", data=" + data +
                 '}';
     }
