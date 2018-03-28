@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -93,13 +94,17 @@ public class TodoApiController {
 //        return ResultVo.failed();
 //    }
 
-    @ApiImplicitParam(name = "id", value = "todo详情id", required = true, dataType = "Long",paramType = "query")
+    @ApiImplicitParam(name = "id", value = "todo详情idList, 用','分割id", required = true, dataType = "String",paramType = "query")
     @ApiOperation(value = "根据id删除todo详情")
     @GetMapping("delete")
-    public ResultVo deleteById(@RequestParam Number id){
-        Long todoId = id.longValue();
+    public ResultVo deleteById(@RequestParam String id){
+        String[] arr = id.split(",");
+        List<Long> ids = new ArrayList<>(arr.length);
+        for(String s : arr){
+            ids.add(Long.valueOf(s));
+        }
         try {
-            boolean success = todoService.deletedById(todoId);
+            boolean success = todoService.deletedById(ids);
             if(success){
                 return ResultVo.succeed();
             }

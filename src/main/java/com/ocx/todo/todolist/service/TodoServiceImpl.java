@@ -47,8 +47,8 @@ class TodoServiceImpl implements TodoService{
 
     @Override
     @Transactional
-    public Boolean deletedById(Long id) {
-        return todoDao.deletedById(id) > 0;
+    public Boolean deletedById(List<Long> ids) {
+        return todoDao.deletedByIds(ids) > 0;
     }
 
     @Override

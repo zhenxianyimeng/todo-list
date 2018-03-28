@@ -17,7 +17,7 @@ public interface TodoService {
 
     Boolean updateStatusById(List<Long> id, Integer status);
 
-    Boolean deletedById(Long id);
+    Boolean deletedById(List<Long> ids);
 
     TodoList getById(Long id);
 
