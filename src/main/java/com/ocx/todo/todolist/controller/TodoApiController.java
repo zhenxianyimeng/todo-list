@@ -61,11 +61,9 @@ public class TodoApiController {
                 list = todoService.listByStatusOrderByTime(status);
             }
             ResultVo<List<TodoList>> resultVo = new ResultVo<>(BusinessCode.SUCCESS.code(), BusinessCode.SUCCESS.msg());
-            if(!CollectionUtils.isEmpty(list)){
-                long active = list.stream().filter(t->t.getStatus()==0).count();
-                resultVo.setActiveCount(active);
-                resultVo.setCompletedCount(list.size() - active);
-            }
+
+            resultVo.setActiveCount((long)todoService.listByStatusOrderByTime(0).size());
+            resultVo.setCompletedCount((long)todoService.listByStatusOrderByTime(1).size());
             resultVo.setData(list);
             return resultVo;
         }catch (Exception e){
